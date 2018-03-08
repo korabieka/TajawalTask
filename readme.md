@@ -44,8 +44,8 @@ example : `http://localhost:8081?sortBy=price` or `http://localhost:8081?sortBy=
 
 # Codeclimate Badge for maintainability
 
-[![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/972e14cd6011c6f0097b/maintainability)](https://codeclimate.com/github/korabieka/TajawalTask/maintainability)
 
 #CodeClimate Badge for Test Coverage
 
-[![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/972e14cd6011c6f0097b/test_coverage)](https://codeclimate.com/github/korabieka/TajawalTask/test_coverage)
