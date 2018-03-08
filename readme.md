@@ -37,3 +37,7 @@ example : `http://localhost:8081?sortBy=price` or `http://localhost:8081?sortBy=
 2- Run test cases .
 
 `./vendor/bin/phpunit  Tests/*`
+
+#Travis Badge
+
+[![Build Status](https://travis-ci.org/korabieka/TajawalTask.svg?branch=master)](https://travis-ci.org/korabieka/TajawalTask)
