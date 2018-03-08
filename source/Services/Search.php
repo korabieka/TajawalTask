@@ -32,14 +32,11 @@ Class Search {
 		$hotels = $arrayToSearchIn["hotels"];
 
 		if(count($filters) > 0) {
-
-			// $keys = array_keys($filters['name'], array_column($hotels, 'name'));
 			if (isset($filters['name'])) {
 				$hotels = array_filter($hotels , function($hotel) use ( $filters ) {
 					return $filters['name'] == $hotel->name;
 				});
-			}
-			
+			}			
 			if(isset($filters['priceFrom']) && isset($filters['priceTo'])) {
 				$hotels = array_filter( $hotels, function($hotel) use ( $filters ) {
 					return ((float)$filters['priceFrom'] <= $hotel->price && (float)$filters['priceTo'] >= $hotel->price);
