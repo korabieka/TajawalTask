@@ -27,7 +27,6 @@ Class Search {
 	public function searchInTheJson(array $filters = []): array
 	{
 		// code to search in the json
-		$result = array();
 		$arrayToSearchIn = $this->convertJSONToArray($this->json);
 		$hotels = $arrayToSearchIn["hotels"];
 
@@ -50,10 +49,12 @@ Class Search {
 					return $filters['priceTo'] >= $hotel->price;
 				});
 			}
-			return $hotels;
+			$result = $hotels;
 		} else {
-			return $hotels;
+			$result = $hotels;
 		}
+
+		return $result;
 	}
 
 	/**
