@@ -41,3 +41,11 @@ example : `http://localhost:8081?sortBy=price` or `http://localhost:8081?sortBy=
 # Travis Badge
 
 [![Build Status](https://travis-ci.org/korabieka/TajawalTask.svg?branch=master)](https://travis-ci.org/korabieka/TajawalTask)
+
+# Codeclimate Badge for maintainability
+
+[![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
+
+#CodeClimate Badge for Test Coverage
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/test_coverage)](https://codeclimate.com/github/codeclimate/codeclimate/test_coverage)
