@@ -30,6 +30,7 @@ Class Search {
 		$arrayToSearchIn = $this->convertJSONToArray($this->json);
 		$hotels = $arrayToSearchIn["hotels"];
 
+		// Applying filters if they are exists
 		if(count($filters) > 0) {
 			if (isset($filters['name'])) {
 				$hotels = array_filter($hotels , function($hotel) use ( $filters ) {
@@ -65,35 +66,5 @@ Class Search {
 	public function convertJSONToArray(string $json): array
 	{
 		return (array)json_decode($json);
-	}
-
-	/**
-	* This function for sorting the result based on sortBy parameter
-	* @param array $arrayWantToBeSorted
-	* @param string $sortBy
-	* @return array
-	*/
-	public function sortTheResult(array $arrayWantToBeSorted , string $sortBy): array
-	{
-		if($sortBy == 'name') {
-			$names = array();
-			foreach ($arrayWantToBeSorted as $key => $row)
-			{
-			    $names[$key] = $row->name;
-			}
-			array_multisort($names, SORT_ASC, $arrayWantToBeSorted);
-			return $arrayWantToBeSorted;
-		} else if ($sortBy == 'price') {
-			$prices = array();
-			foreach ($arrayWantToBeSorted as $key => $row)
-			{
-			    $prices[$key] = $row->price;
-			}
-			array_multisort($prices, SORT_ASC, $arrayWantToBeSorted);
-			return $arrayWantToBeSorted;
-		}
-		else {
-			return $arrayWantToBeSorted;
-		}
 	}
 } 
