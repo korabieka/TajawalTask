@@ -2,7 +2,7 @@
 
 namespace App\Mappers;
 
-class Hotel
+class HotelMapper
 {
     /**
     * Hotel name
@@ -33,7 +33,7 @@ class Hotel
     /**
      * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -43,17 +43,15 @@ class Hotel
      *
      * @return self
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
-
-        return $this;
     }
 
     /**
      * @return float
      */
-    public function getPrice()
+    public function getPrice(): float
     {
         return $this->price;
     }
@@ -63,17 +61,15 @@ class Hotel
      *
      * @return self
      */
-    public function setPrice($price)
+    public function setPrice(float $price)
     {
         $this->price = $price;
-
-        return $this;
     }
 
     /**
      * @return string
      */
-    public function getCity()
+    public function getCity(): string
     {
         return $this->city;
     }
@@ -83,17 +79,15 @@ class Hotel
      *
      * @return self
      */
-    public function setCity($city)
+    public function setCity(string $city)
     {
         $this->city = $city;
-
-        return $this;
     }
 
     /**
      * @return array
      */
-    public function getAvailability()
+    public function getAvailability(): array
     {
         return $this->availability;
     }
@@ -106,11 +100,9 @@ class Hotel
     public function setAvailability(array $availability)
     {
         $this->availability = $availability;
-
-        return $this;
     }
 
-    public function toArray()
+    public function toArray(): array
     {
         return [
             'name' => $this->getName(),

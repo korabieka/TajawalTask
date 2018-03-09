@@ -22,14 +22,6 @@ class ApiHandler
 	}
 
 	/**
-	* Here we close the curl session in the destructor
-	*/
-	public function __destruct()
-	{
-		curl_close($this->curl);
-	}
-
-	/**
 	* Here we call the api and returning the json result
 	* @param string $method
 	* @param string $url
@@ -55,7 +47,11 @@ class ApiHandler
 	            curl_setopt($this->curl, CURLOPT_URL,$url);
 	    }
 	    curl_setopt($this->curl, CURLOPT_RETURNTRANSFER, true);
+
 	    $result = curl_exec($this->curl);
+
+	    curl_close($this->curl);
+	    
 	    return $result;
     }
 }

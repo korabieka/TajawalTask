@@ -2,15 +2,22 @@
 
 namespace App\Services;
 
+/**
+* This is a class to validate the query parameters
+*
+* @author     Hussien
+* @version    1
+* ...
+*/
 class Validator
 {
 	public $filters = array();
-
-	public function __construct()
-	{
-
-	}
-
+	
+	/**
+	* This function to validate the query parameters
+	* @param array $filters
+	* @return array
+	*/
 	public function validate(array $filters): array
 	{
 		if ($filters['name'])

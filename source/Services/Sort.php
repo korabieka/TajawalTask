@@ -2,10 +2,21 @@
 
 namespace App\Services;
 
+/**
+* This is a class is responsible for sorting objects in an array
+*
+* @author     Hussien
+* @version    1
+* ...
+*/
 class Sort
 {
 	private $arrayToBeSorted;
 
+	/**
+	* This is a constructor function
+	* @param array $array
+	*/
 	public function __construct(array $array)
 	{
 		$this->arrayToBeSorted = $array;
@@ -20,10 +31,10 @@ class Sort
 		$names = array();
 		
 		foreach ($this->arrayToBeSorted as $key => $row) {
-		    $names[$key] = $row->name;
+		    $names[$key] = $row->getName();
 		}
 
-		array_multisort($names, SORT_ASC, $arrayToBeSorted);
+		array_multisort($names, SORT_ASC, $this->arrayToBeSorted);
 		
 		return $this->arrayToBeSorted;
 	}
@@ -37,11 +48,11 @@ class Sort
 		$prices = array();
 
 		foreach ($this->arrayToBeSorted as $key => $row) {
-		    $prices[$key] = $row->price;
+		    $prices[] = $row->getPrice();
 		}
 
 		array_multisort($prices, SORT_ASC, $this->arrayToBeSorted);
-		
+
 		return $this->arrayToBeSorted;
 	}
 }

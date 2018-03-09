@@ -11,60 +11,58 @@ namespace App\Services;
 */
 Class Search {
 
-	private $json;
+	private $hotels;
 
 	/**
 	* Here we assign our private property the json object we want to search
+	* @param array $hotels
 	*/
-	public function __construct(string $json)
+	public function __construct(array $hotels)
 	{
-		$this->json = $json;
+		$this->hotels = $hotels;
 	}
 
 	/**
-	* Here we search in the json
+	* Here we search in mapped hotels
+	* @param array $filters
+	* @return array
 	*/
-	public function searchInTheJson(array $filters = []): array
+	public function searchInHotels(array $filters = []): array
 	{
-		// code to search in the json
-		$arrayToSearchIn = $this->convertJSONToArray($this->json);
-		$hotels = $arrayToSearchIn["hotels"];
 
 		// Applying filters if they are exists
+
 		if(count($filters) > 0) {
-			if (isset($filters['name'])) {
-				$hotels = array_filter($hotels , function($hotel) use ( $filters ) {
-					return $filters['name'] == $hotel->name;
-				});
-			}			
-			if(isset($filters['priceFrom']) && isset($filters['priceTo'])) {
-				$hotels = array_filter( $hotels, function($hotel) use ( $filters ) {
-					return ((float)$filters['priceFrom'] <= $hotel->price && (float)$filters['priceTo'] >= $hotel->price);
-				});				
-			} else if (isset($filters['priceFrom'])) {
-				$hotels = array_filter( $hotels, function($hotel) use ( $filters ) {
-					return (float)$filters['priceFrom'] <= $hotel->price;
-				});
-			} else if (isset($filters['priceTo'])){
-				$hotels = array_filter( $hotels, function($hotel) use ( $filters ) {
-					return $filters['priceTo'] >= $hotel->price;
+
+			if ($filters['name']) {
+				$this->hotels = array_filter($this->hotels , function($hotel) use ( $filters ) {
+					return $filters['name'] == $hotel->getName();
 				});
 			}
-			$result = $hotels;
+
+			if($filters['priceFrom'] && $filters['priceTo']) {
+				$this->hotels = array_filter( $this->hotels, function($hotel) use ( $filters ) {
+					return ((float)$filters['priceFrom'] <= $hotel->getPrice() && (float)$filters['priceTo'] >= $hotel->getPrice());
+				});				
+			} else {
+
+				if ($filters['priceFrom']) {
+					$this->hotels = array_filter( $this->hotels, function($hotel) use ( $filters ) {
+						return (float)$filters['priceFrom'] <= $hotel->getPrice();
+					});
+				} 
+			 	
+			 	if ($filters['priceTo']){
+					$this->hotels = array_filter( $this->hotels, function($hotel) use ( $filters ) {
+					return $filters['priceTo'] >= $hotel->getPrice();
+					});
+				}
+			}
+			$result = $this->hotels;
 		} else {
-			$result = $hotels;
+			$result = $this->hotels;
 		}
 
 		return $result;
-	}
-
-	/**
-	* This function for converting the JSON object to array
-	* @param $json
-	* @return array
-	*/
-	public function convertJSONToArray(string $json): array
-	{
-		return (array)json_decode($json);
 	}
 } 
