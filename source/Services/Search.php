@@ -29,33 +29,26 @@ Class Search {
 	*/
 	public function searchInHotels(array $filters = []): array
 	{
-
 		// Applying filters if they are exists
 
 		if(count($filters) > 0) {
 
 			if ($filters['name']) {
-				$this->hotels = array_filter($this->hotels , function($hotel) use ( $filters ) {
-					return $filters['name'] == $hotel->getName();
-				});
+				$this->hotels = $this->searchByName($this->hotels, $filters);
 			}
 
 			if($filters['priceFrom'] && $filters['priceTo']) {
-				$this->hotels = array_filter( $this->hotels, function($hotel) use ( $filters ) {
-					return ((float)$filters['priceFrom'] <= $hotel->getPrice() && (float)$filters['priceTo'] >= $hotel->getPrice());
-				});				
+
+				$this->hotels = $this->searchByPrice($this->hotels,'fromTo', $filters);
+
 			} else {
 
 				if ($filters['priceFrom']) {
-					$this->hotels = array_filter( $this->hotels, function($hotel) use ( $filters ) {
-						return (float)$filters['priceFrom'] <= $hotel->getPrice();
-					});
+					$this->hotels = $this->searchByPrice($this->hotels,'from', $filters);	
 				} 
 			 	
 			 	if ($filters['priceTo']){
-					$this->hotels = array_filter( $this->hotels, function($hotel) use ( $filters ) {
-					return $filters['priceTo'] >= $hotel->getPrice();
-					});
+					$this->hotels = $this->searchByPrice($this->hotels,'to', $filters);	
 				}
 			}
 			$result = $this->hotels;
@@ -64,5 +57,48 @@ Class Search {
 		}
 
 		return $result;
+	}
+
+	/**
+	* Here we search by name
+	* @param array $hotels
+	* @return array
+	*/
+	public function searchByName(array $hotels , array $filters): array
+	{
+		$hotels = array_filter($hotels , function($hotel) use ( $filters ) {
+			return $filters['name'] == $hotel->getName();
+		});
+
+		return $hotels;
+	}
+
+	/**
+	* Here we search by price range
+	* @param array $filters
+	* @param string $priceRange
+	* @param array $filters
+	* @return array
+	*/
+	public function searchByPrice(array $hotels , string $priceRange , array $filters): array
+	{
+		switch ($priceRange) {
+			case 'fromTo':
+				$hotels = array_filter($hotels, function($hotel) use ( $filters ) {
+					return ((float)$filters['priceFrom'] <= $hotel->getPrice() && (float)$filters['priceTo'] >= $hotel->getPrice());
+				});	
+				break;
+			case 'from':
+				$hotels = array_filter($hotels, function($hotel) use ( $filters ) {
+						return (float)$filters['priceFrom'] <= $hotel->getPrice();
+					});
+				break;
+			case 'to':
+				$hotels = array_filter($hotels, function($hotel) use ( $filters ) {
+					return $filters['priceTo'] >= $hotel->getPrice();
+					});
+				break;
+		}
+		return $hotels ;
 	}
 } 

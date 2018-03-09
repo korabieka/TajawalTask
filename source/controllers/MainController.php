@@ -58,7 +58,7 @@ class MainController
 			}
 		}
 
-		$result = $this->hotelMapperService->jsonSerialize($result);
+		$result = $this->hotelMapperService->serialize($result);
 
 		header('Content-Type: application/json');
 
