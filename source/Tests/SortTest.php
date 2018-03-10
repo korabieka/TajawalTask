@@ -44,7 +44,7 @@ class SortTest extends TestCase
         $result = $this->hotelMapperService->serialize($result);
         $this->assertInternalType('array',$result);
         foreach ($result as $i => $hotel) {
-            $this->assertGreaterThan($hotels[$i+1]['name'],$hotel['name']);
+            $this->assertGreaterThan($result[$i+1]['name'],$hotel['name']);
             $this->assertArrayHasKey('name', $hotel);
             $this->assertArrayHasKey('price', $hotel);
             $this->assertArrayHasKey('city', $hotel);
@@ -61,7 +61,8 @@ class SortTest extends TestCase
         $result = $this->hotelMapperService->serialize($result);
         $this->assertInternalType('array',$result);
         foreach ($result as $i => $hotel) {
-            $this->assertGreaterThan($hotels[$i+1]['price'],$hotel['price']);
+            var_dump($hotel['price']);die;
+            $this->assertGreaterThan($result[$i+1]['price'],$hotel['price']);
             $this->assertArrayHasKey('name', $hotel);
             $this->assertArrayHasKey('price', $hotel);
             $this->assertArrayHasKey('city', $hotel);
