@@ -20,6 +20,21 @@ trait HotelHelper
                         "to" => "25-10-2020"
                     ]
                 ]
+            ],
+                [
+                "name" => "Media One Hotel",
+                "price" => "110",
+                "city" => "Dubai",
+                "availability" => [
+                    [
+                        "from" => "10-10-2020",
+                        "to" => "15-10-2020"
+                    ],
+                    [
+                        "from" => "20-10-2020",
+                        "to" => "25-10-2020"
+                    ]
+                ]
             ]
         ]];
     }

@@ -41,12 +41,14 @@ class SortTest extends TestCase
     public function testSortByName()
     {
         $result=$this->sort->sortByName();
+        $result = $this->hotelMapperService->serialize($result);
         $this->assertInternalType('array',$result);
-        foreach ($result as $hotel) {
-            $this->assertObjectHasAttribute('name', $hotel);
-            $this->assertObjectHasAttribute('price', $hotel);
-            $this->assertObjectHasAttribute('city', $hotel);
-            $this->assertObjectHasAttribute('availability', $hotel);
+        foreach ($result as $i => $hotel) {
+            $this->assertGreaterThan($hotels[$i+1]['name'],$hotel['name']);
+            $this->assertArrayHasKey('name', $hotel);
+            $this->assertArrayHasKey('price', $hotel);
+            $this->assertArrayHasKey('city', $hotel);
+            $this->assertArrayHasKey('availability', $hotel);
         }
     }
 
@@ -56,12 +58,14 @@ class SortTest extends TestCase
     public function testSortByPrice()
     {
         $result=$this->sort->sortByPrice();
+        $result = $this->hotelMapperService->serialize($result);
         $this->assertInternalType('array',$result);
-        foreach ($result as $hotel) {
-            $this->assertObjectHasAttribute('name', $hotel);
-            $this->assertObjectHasAttribute('price', $hotel);
-            $this->assertObjectHasAttribute('city', $hotel);
-            $this->assertObjectHasAttribute('availability', $hotel);
+        foreach ($result as $i => $hotel) {
+            $this->assertGreaterThan($hotels[$i+1]['price'],$hotel['price']);
+            $this->assertArrayHasKey('name', $hotel);
+            $this->assertArrayHasKey('price', $hotel);
+            $this->assertArrayHasKey('city', $hotel);
+            $this->assertArrayHasKey('availability', $hotel);
         }   
     }
 }
