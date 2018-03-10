@@ -36,7 +36,7 @@ example : `http://localhost:8081?sortBy=price` or `http://localhost:8081?sortBy=
 
 2- Run test cases .
 
-`./vendor/bin/phpunit  Tests/*`
+`./vendor/bin/phpunit  Tests/`
 
 # Travis Badge
 
