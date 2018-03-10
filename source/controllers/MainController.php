@@ -49,7 +49,7 @@ class MainController
 
 		$result = $search->searchInHotels($filters);
 
-		if ($filters['sortBy']){
+		if (isset($filters['sortBy'])){
 			$sort = new Sort($result);
 			if($filters['sortBy'] == 'name') {
 				$result = $sort->sortByName();
