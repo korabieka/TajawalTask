@@ -22,6 +22,7 @@ class SearchTest extends TestCase
     private $hotelMapperService;
     private $jsonHotels;
     private $mappedHotels;
+    private $search;
     
     /**
     * Here we we can map our mockup to our hotels mapper class
@@ -31,6 +32,7 @@ class SearchTest extends TestCase
         $this->hotelMapperService = new HotelMapperService();
         $this->jsonHotels = json_encode($this->getHotelsRequestExample());
         $this->mappedHotels = $this->hotelMapperService->mapJsonToHotels($this->jsonHotels);
+        $this->search = new Search($this->mappedHotels);
     }
 
     /**
@@ -39,8 +41,7 @@ class SearchTest extends TestCase
     
     public function testSearchByName()
     {
-        $search=new Search($this->mappedHotels);
-        $result=$search->searchInHotels(["name"=>"Rotana Hotel"]);
+        $result=$this->search->searchInHotels(["name"=>"Rotana Hotel"]);
         $this->assertInternalType('array',$result);
         foreach ($result as $hotel) {
             $this->assertObjectHasAttribute('name', $hotel);
@@ -55,8 +56,7 @@ class SearchTest extends TestCase
     */
     public function testSearchByPrice()
     {
-        $search=new Search($this->mappedHotels);
-        $result=$search->searchInHotels(["priceFrom"=>"100","priceTo"=>"150"]);
+        $result=$this->search->searchInHotels(["priceFrom"=>"100","priceTo"=>"150"]);
         $this->assertInternalType('array',$result);
         foreach ($result as $hotel) {
             $this->assertObjectHasAttribute('name', $hotel);

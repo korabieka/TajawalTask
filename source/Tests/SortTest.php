@@ -22,6 +22,7 @@ class SortTest extends TestCase
     private $hotelMapperService;
     private $jsonHotels;
     private $mappedHotels;
+    private $sort;
     /**
     * Here we we can map our mockup to our hotels mapper class
     */
@@ -30,6 +31,7 @@ class SortTest extends TestCase
         $this->hotelMapperService = new HotelMapperService();
         $this->jsonHotels = json_encode($this->getHotelsRequestExample());
         $this->mappedHotels = $this->hotelMapperService->mapJsonToHotels($this->jsonHotels);
+        $this->sort = new Sort($this->mappedHotels);
     }
 
     /**
@@ -38,8 +40,7 @@ class SortTest extends TestCase
     
     public function testSortByName()
     {
-        $sort=new Sort($this->mappedHotels);
-        $result=$sort->sortByName();
+        $result=$this->sort->sortByName();
         $this->assertInternalType('array',$result);
         foreach ($result as $hotel) {
             $this->assertObjectHasAttribute('name', $hotel);
@@ -54,8 +55,7 @@ class SortTest extends TestCase
     */
     public function testSortByPrice()
     {
-        $sort=new Sort($this->mappedHotels);
-        $result=$sort->sortByPrice();
+        $result=$this->sort->sortByPrice();
         $this->assertInternalType('array',$result);
         foreach ($result as $hotel) {
             $this->assertObjectHasAttribute('name', $hotel);
