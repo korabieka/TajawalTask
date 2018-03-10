@@ -33,21 +33,21 @@ Class Search {
 
 		if(count($filters) > 0) {
 
-			if ($filters['name']) {
+			if (isset($filters['name'])) {
 				$this->hotels = $this->searchByName($this->hotels, $filters);
 			}
 
-			if($filters['priceFrom'] && $filters['priceTo']) {
+			if(isset($filters['priceFrom']) && isset($filters['priceTo'])) {
 
 				$this->hotels = $this->searchByPrice($this->hotels,'fromTo', $filters);
 
 			} else {
 
-				if ($filters['priceFrom']) {
+				if (isset($filters['priceFrom'])) {
 					$this->hotels = $this->searchByPrice($this->hotels,'from', $filters);	
 				} 
 			 	
-			 	if ($filters['priceTo']){
+			 	if (isset($filters['priceTo'])){
 					$this->hotels = $this->searchByPrice($this->hotels,'to', $filters);	
 				}
 			}
